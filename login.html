@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f4f8;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .login-card {
+      background: #ffffff;
+      padding: 40px 36px;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .login-card h1 {
+      font-size: 1.5rem;
+      color: #1a202c;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+
+    /* =========================================================
+       EDIT #1 — Change the logo/title text and subtitle below
+       ========================================================= */
+    .login-card .subtitle {
+      font-size: 0.875rem;
+      color: #718096;
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    input {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #cbd5e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #2d3748;
+      transition: border-color 0.2s;
+      margin-bottom: 20px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #4f46e5;
+    }
+
+    .error-msg {
+      display: none;
+      font-size: 0.82rem;
+      color: #e53e3e;
+      background: #fff5f5;
+      border: 1px solid #fed7d7;
+      border-radius: 6px;
+      padding: 8px 12px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      /* =========================================================
+         EDIT #2 — Change the button colour by editing the
+         background colour value below (currently indigo #4f46e5)
+         ========================================================= */
+      background: #4f46e5;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background: #4338ca;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+
+    <!-- =========================================================
+         EDIT #1 — Your organisation name and a short description
+         ========================================================= -->
+    <h1>Spatial Data Portal</h1>
+    <p class="subtitle">Enter your reference number and PIN to continue</p>
+
+    <label for="refNumber">Reference Number</label>
+    <input
+      type="text"
+      id="refNumber"
+      placeholder="e.g. REF-123456"
+      autocomplete="off"
+    />
+
+    <label for="pin">PIN</label>
+    <input
+      type="password"
+      id="pin"
+      placeholder="Enter your PIN"
+      maxlength="8"
+    />
+
+    <div class="error-msg" id="errorMsg">
+      Incorrect reference number or PIN. Please try again.
+    </div>
+
+    <!-- =========================================================
+         EDIT #3 — Change the button label text here if you like
+         ========================================================= -->
+    <button onclick="handleLogin()">Enter</button>
+
+  </div>
+
+  <script>
+    function handleLogin() {
+      const ref = document.getElementById('refNumber').value.trim();
+      const pin = document.getElementById('pin').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+
+      // =========================================================
+      // EDIT #4 — Set the correct reference number and PIN below.
+      //           Replace 'REF-123456' with your reference number
+      //           and '1234' with your chosen PIN.
+      //           To allow MULTIPLE valid logins, add more entries
+      //           to the credentials array, e.g.:
+      //           { ref: 'REF-999', pin: '5678' }
+      // =========================================================
+      const credentials = [
+        { ref: 'REF-123456', pin: '1234' }
+      ];
+
+      const isValid = credentials.some(
+        c => c.ref === ref && c.pin === pin
+      );
+
+      if (isValid) {
+        errorMsg.style.display = 'none';
+
+        // =========================================================
+        // EDIT #5 — Replace the URL below with the page you want
+        //           the user to land on after a successful login.
+        // =========================================================
+        window.location.href = 'https://emmanuel-abebresse.github.io/LCHQ2/';
+
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    }
+
+    // Allow pressing Enter key to submit
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') handleLogin();
+    });
+  </script>
+
+</body>
+</html>
